@@ -51,6 +51,7 @@ uint8_t MessageLen;
 VL53L0X_RangingMeasurementData_t RangingData;
 VL53L0X_Dev_t  vl53l0x_c; // center module
 VL53L0X_DEV    Dev = &vl53l0x_c;
+uint8_t TofDataRead = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -73,6 +74,15 @@ int __io_putchar(int ch)
 	    return 1;
 
 	}
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+     {
+     	if(GPIO_Pin == TOF_Pin)
+     	{
+     		VL53L0X_GetRangingMeasurementData(Dev, &RangingData);
+     		VL53L0X_ClearInterruptMask(Dev, VL53L0X_REG_SYSTEM_INTERRUPT_GPIO_NEW_SAMPLE_READY);
+     		TofDataRead = 1;
+     	}
+     }
 /* USER CODE END 0 */
 
 /**
@@ -87,6 +97,7 @@ int main(void)
     uint8_t isApertureSpads;
     uint8_t VhvSettings;
     uint8_t PhaseCal;
+
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -124,35 +135,31 @@ int main(void)
   //
   // VL53L0X init for Single Measurement
   //
+  	HAL_NVIC_DisableIRQ(EXTI9_5_IRQn);
 
-  VL53L0X_WaitDeviceBooted( Dev );
-  VL53L0X_DataInit( Dev );
-  VL53L0X_StaticInit( Dev );
-  VL53L0X_PerformRefCalibration(Dev, &VhvSettings, &PhaseCal);
-  VL53L0X_PerformRefSpadManagement(Dev, &refSpadCount, &isApertureSpads);
-  VL53L0X_SetDeviceMode(Dev, VL53L0X_DEVICEMODE_SINGLE_RANGING);
+    VL53L0X_WaitDeviceBooted( Dev );
+    VL53L0X_DataInit( Dev );
+    VL53L0X_StaticInit( Dev );
+    VL53L0X_PerformRefCalibration(Dev, &VhvSettings, &PhaseCal);
+    VL53L0X_PerformRefSpadManagement(Dev, &refSpadCount, &isApertureSpads);
+    VL53L0X_SetDeviceMode(Dev, VL53L0X_DEVICEMODE_CONTINUOUS_RANGING);
+    VL53L0X_StartMeasurement(Dev);
 
-  // Enable/Disable Sigma and Signal check
-  VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckEnable(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, 1);
-  VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGNAL_RATE_FINAL_RANGE, (FixPoint1616_t)(0.1*65536));
-  VL53L0X_SetLimitCheckValue(Dev, VL53L0X_CHECKENABLE_SIGMA_FINAL_RANGE, (FixPoint1616_t)(60*65536));
-  VL53L0X_SetMeasurementTimingBudgetMicroSeconds(Dev, 33000);
-  VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_PRE_RANGE, 18);
-  VL53L0X_SetVcselPulsePeriod(Dev, VL53L0X_VCSEL_PERIOD_FINAL_RANGE, 14);
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+    HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
   while (1)
   {
-	  VL53L0X_PerformSingleRangingMeasurement(Dev, &RangingData);
-
-	  if(RangingData.RangeStatus == 0)
-	  {
-		  MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
-		  HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
-	  }
+	  if(TofDataRead == 1)
+	  	  {
+	  		MessageLen = sprintf((char*)Message, "Measured distance: %i\n\r", RangingData.RangeMilliMeter);
+	  		HAL_UART_Transmit(&huart2, Message, MessageLen, 100);
+	  		TofDataRead = 0;
+	  	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -307,6 +314,16 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(LD2_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pin : TOF_Pin */
+  GPIO_InitStruct.Pin = TOF_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_IT_FALLING;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  HAL_GPIO_Init(TOF_GPIO_Port, &GPIO_InitStruct);
+
+  /* EXTI interrupt init*/
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
 

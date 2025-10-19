@@ -27,14 +27,14 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h \
  ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_api.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_api_strings.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_def.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_device.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_types.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_platform.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_platform_log.h \
- /Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_tof.h
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_api.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_api_strings.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_def.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_device.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_types.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_platform.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_platform_log.h \
+ C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_tof.h
 ../Core/Inc/main.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal.h:
 ../Core/Inc/stm32f4xx_hal_conf.h:
@@ -64,11 +64,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pwr_ex.h:
 ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_api.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_api_strings.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_def.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_device.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_types.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_platform.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_platform_log.h:
-/Users/morswin/STM32CubeIDE/workspace_1.17.0/vl53test/Drivers/vl53l0x/vl53l0x_tof.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_api.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_api_strings.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_def.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_device.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_types.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_platform.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_platform_log.h:
+C:/Users/benia/OneDrive/Dokumenty/KNR/mini/vl53test/Drivers/vl53l0x/vl53l0x_tof.h:
